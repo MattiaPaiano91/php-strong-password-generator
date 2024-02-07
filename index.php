@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+require_once __DIR__ . '/functions.php';
+$randomPassword = '';
+
+
+$passwordLength = intval($_GET['password']);
+
+   
+$randomPassword = generatePassword($passwordLength);
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -18,11 +30,23 @@
 
 <body>
     <header>
-        header
+        <h1 class="m-auto w-50 text-center">Generatore di Password "quasi" Sicure</h1>
     </header>
 
     <main>
-        main
+        <form action="" method="get">
+            <label for="password">Inserisci la lunghezza della tua password</label>
+            <input type="number" id="password" name="password">
+            <button>
+                Crea
+            </button>
+        </form>
+        <?php
+        // Mostra la password solo se è stata generata
+        if (!empty($randomPassword)) {
+            echo "<p>La tua password generata è: <strong>$randomPassword</strong></p>";
+        }
+        ?>
     </main>
 
     <footer>
