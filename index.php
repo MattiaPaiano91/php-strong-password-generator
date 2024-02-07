@@ -3,14 +3,7 @@
 <?php
 
 require_once __DIR__ . '/functions.php';
-$randomPassword = '';
-
-
-$passwordLength = intval($_GET['password']);
-
-   
-$randomPassword = generatePassword($passwordLength);
-
+session_start();
 ?>
 
 <head>
@@ -30,28 +23,31 @@ $randomPassword = generatePassword($passwordLength);
 
 <body>
     <header>
-        <h1 class="m-auto w-50 text-center">Generatore di Password "quasi" Sicure</h1>
+        <h1 class="m-auto w-50 text-center mt-5 ">Generatore di Password "quasi" Sicure</h1>
     </header>
 
     <main>
-        <form action="" method="get">
-            <label for="password">Inserisci la lunghezza della tua password</label>
-            <input type="number" id="password" name="password">
-            <button>
+        <form class="m-5" action="" method="post">
+            <label class="form-label" for="password">Inserisci la lunghezza della tua password:</label>
+            <input type="number" class="form-control w-25 " id="password" name="password">
+            <button class="btn btn-outline-primary mt-3 ">
                 Crea
             </button>
         </form>
         <?php
-        // Mostra la password solo se è stata generata
-        if (!empty($randomPassword)) {
-            echo "<p>La tua password generata è: <strong>$randomPassword</strong></p>";
-        }
+
+            if (empty($_SESSION['passwordLength']) && empty($_SESSION['randomPassword'])) {
+                echo "<div class='ms-5'>  Il generatore è fermo! </div>";
+            }
+            else{
+                echo "<div class='ms-5'> La tua password generata è: {$_SESSION['randomPassword']} </div>";
+
+                echo "<button class='btn btn-outline-primary ms-5 mt-3 d-block '><a class='text-primary text-decoration-none' href='stop.php'> Ferma il generatore </a><button>";
+            }
         ?>
     </main>
 
-    <footer>
-        footer
-    </footer>
+
 </body>
 
 </html>

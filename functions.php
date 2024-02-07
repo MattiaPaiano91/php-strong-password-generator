@@ -1,4 +1,19 @@
+
+
+
 <?php
+
+    session_start();
+
+    $randomPassword = '';
+
+
+    $passwordLength = intval($_POST['password']);
+
+
+    $randomPassword = generatePassword($passwordLength);
+
+
     function generatePassword($length)
     {
         $items = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=<>?';
@@ -9,4 +24,8 @@
         }
         return $password;
     } 
+
+    $_SESSION['randomPassword'] = $randomPassword;
+
+    $_SESSION['passwordLength'] = $passwordLength;
 ?>
